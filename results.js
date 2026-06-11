@@ -5,9 +5,9 @@
 
 const MATCH_RESULTS = {
   // 11-jun | Grupp A | Mexiko - Sydafrika
-  1: "",
+  1: "3-1",
   // 12-jun | Grupp A | Sydkorea - Czechia
-  2: "",
+  2: "1-1",
   // 12-jun | Grupp B | Kanada - Bosnien-Herzigovina
   3: "",
   // 13-jun | Grupp D | USA - Paraguay
