@@ -80,6 +80,41 @@ Fyllning:
 /* ========================================================
    SLUT CSS
    ======================================================== */
+
+/* ========================================================
+   UPPDATERAD MARKERING AV TIPS
+   ======================================================== */
+
+/* Rätt vinnare eller rätt oavgjort = grön fyllning */
+.result-chip.prediction-correct-outcome{
+  background:rgba(34,197,94,.78);
+  color:#052e16;
+}
+
+/* Fel vinnare eller fel oavgjort = tjock röd ram */
+.result-chip.prediction-wrong-outcome{
+  border:3px solid rgba(248,113,113,.95);
+  box-shadow:0 0 0 1px rgba(248,113,113,.45);
+}
+
+/* Exakt rätt resultat resultat = tjock grön ram */
+.result-chip.prediction-exact{
+  border:3px solid rgba(134,239,172,.98);
+  box-shadow:0 0 0 1px rgba(134,239,172,.65);
+}
+
+/* Ett rätt antal mål = gul fyllning */
+.result-chip.prediction-one-goal{
+  background:rgba(250,204,21,.82);
+  color:#3f2f00;
+}
+
+/* Inget lag rätt antal mål = röd fyllning */
+.result-chip.prediction-no-goal{
+  background:rgba(239,68,68,.75);
+  color:#450a0a;
+}
+
 </style></head><body><div class="wrap"><section class="hero"><h1>VM-tipset 2026</h1><p>Sammanställning av tipsen på VSE.</p></section><div class="tabs"><button class="tab active" data-view="compare">Jämför gruppspel</button><button class="tab" data-view="person-Viktor">Viktor</button><button class="tab" data-view="person-Joel">Joel</button><button class="tab" data-view="person-Becir">Becir</button><button class="tab" data-view="person-Hedvig">Hedvig</button></div><main id="content"></main><div class="footer">Genererad från Excel-filen “Viktors tips(1).xlsx”.</div></div><!-- ========================================================
      RESULTS.JS
      Här hämtas riktiga matchresultat
