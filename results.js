@@ -9,9 +9,9 @@ const MATCH_RESULTS = {
   // 12-jun | Grupp A | Sydkorea - Czechia
   2: "2-1",
   // 12-jun | Grupp B | Kanada - Bosnien-Herzigovina
-  3: "",
+  3: "1-1",
   // 13-jun | Grupp D | USA - Paraguay
-  4: "",
+  4: "4-1",
   // 14-jun | Grupp C | Haiti - Skottland
   5: "",
   // 14-jun | Grupp D | Australien - Turkiet
