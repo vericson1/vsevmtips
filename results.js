@@ -13,13 +13,13 @@ const MATCH_RESULTS = {
   // 13-jun | Grupp D | USA - Paraguay
   4: "4-1",
   // 14-jun | Grupp C | Haiti - Skottland
-  5: "",
+  5: "0-1",
   // 14-jun | Grupp D | Australien - Turkiet
-  6: "",
+  6: "2-0",
   // 14-jun | Grupp C | Brasilien - Marocko
-  7: "",
+  7: "1-1",
   // 13-jun | Grupp B | Qatar - Schweiz
-  8: "",
+  8: "1-1",
   // 15-jun | Grupp E | Elfenbenskusten - Ecuador
   9: "",
   // 14-jun | Grupp E | Tyskland - Curaçao
