@@ -4,7 +4,7 @@
 // 1: "2-1",
 
 const MATCH_RESULTS = {
-  // 11-jun | Grupp A | Mexiko - Sydafrika
+   // 11-jun | Grupp A | Mexiko - Sydafrika
   1: "2-0",
   // 12-jun | Grupp A | Sydkorea - Czechia
   2: "2-1",
@@ -21,13 +21,13 @@ const MATCH_RESULTS = {
   // 13-jun | Grupp B | Qatar - Schweiz
   8: "1-1",
   // 15-jun | Grupp E | Elfenbenskusten - Ecuador
-  9: "",
+  9: "1-0",
   // 14-jun | Grupp E | Tyskland - Curaçao
-  10: "",
+  10: "7-1",
   // 14-jun | Grupp F | Nederländerna - Japan
-  11: "",
+  11: "2-2",
   // 15-jun | Grupp F | Sverige - Tunisien
-  12: "",
+  12: "5-1",
   // 16-jun | Grupp H | Saudiarabien - Uruguay
   13: "",
   // 15-jun | Grupp H | Spanien - Kap Verde
