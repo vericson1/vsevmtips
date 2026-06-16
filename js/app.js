@@ -13,7 +13,17 @@ if (!DATA || !PARTICIPANTS) {
 const content=document.getElementById('content');
 const fmtDate=d=>d?new Date(d+'T00:00:00').toLocaleDateString('sv-SE',{day:'numeric',month:'short'}):'';
 const score=m=>`${m.home_goals ?? ''}–${m.away_goals ?? ''}`;
-function resultChip(m, extraClasses=''){return `<span class="result-chip ${extraClasses}">${score(m)}</span>`}
+function resultChip(m, extraClasses='', actualResultText=''){
+  const actual = parseResult(actualResultText);
+  if(!actual){
+    return `<span class="result-chip ${extraClasses}">${score(m)}</span>`;
+  }
+
+  const homeClass = m.home_goals === actual.home ? 'goal-correct' : 'goal-wrong';
+  const awayClass = m.away_goals === actual.away ? 'goal-correct' : 'goal-wrong';
+
+  return `<span class="result-chip ${extraClasses}"><span class="${homeClass}">${m.home_goals}</span><span>–</span><span class="${awayClass}">${m.away_goals}</span></span>`;
+}
 function matchCard(m){return `<div class="match"><div class="match-top"><span>Match ${m.match_no??''}</span><span>${fmtDate(m.date)}</span></div><div class="teams"><span>${m.home??''}</span><span class="score">${score(m)}</span><span>${m.away??''}</span></div>${m.winner?`<div class="winner">Vinnare: ${m.winner}</div>`:''}</div>`}
 function renderOverview(){const champs=Object.entries(CHAMP_COUNTS).sort((a,b)=>b[1]-a[1]).map(([team,n])=>`<div class="bonus-item"><b>${team}</b><div class="muted">${n} tips</div></div>`).join('');const rows=PARTICIPANTS.map(p=>{const d=DATA[p];return `<tr><td><b>${p}</b></td><td>${d.champion??''}</td><td>${d.silver??''}</td><td>${d.bronze??''}</td></tr>`}).join('');content.innerHTML=`<section class="person-header"><div class="section"><h2>Världsmästartips</h2><div class="bonus-list">${champs}</div></div><div class="section compare"><h2>Podium per deltagare</h2><table><thead><tr><th>Deltagare</th><th>Guld</th><th>Silver</th><th>Brons</th></tr></thead><tbody>${rows}</tbody></table></div></section>`}
 
@@ -72,6 +82,95 @@ function getPredictionClasses(prediction, actualResultText){
   return `${outcomeClass} prediction-no-goal`;
 }
 
-function renderCompare(){let nums=[...new Set(Object.values(DATA).flatMap(d=>d.matches.map(m=>m.match_no)))].sort((a,b)=>a-b);let today=new Date().toLocaleDateString('sv-SE',{day:'2-digit',month:'short'}).replace('.','').toLowerCase();let rows=nums.map(n=>{let meta=Object.values(DATA)[0].matches.find(m=>m.match_no===n)||{};let group=(meta.round||'').replace('Grupp ','');let matchName=`${meta.home??''} - ${meta.away??''}`;let actualResult=(typeof MATCH_RESULTS!=='undefined'&&MATCH_RESULTS[n])?MATCH_RESULTS[n]:'-';let rowDate=fmtDate(meta.date).toLowerCase();let todayClass=rowDate===today?'today-row':'';let cells=PARTICIPANTS.map(p=>{let m=DATA[p].matches.find(x=>x.match_no===n);let predictionClasses=m?getPredictionClasses(m,actualResult):'';return `<td>${m?resultChip(m,predictionClasses):''}</td>`}).join('');return `<tr class="${todayClass}" data-q="${(meta.home+' '+meta.away+' '+meta.round).toLowerCase()}"><td>${n}</td><td>${fmtDate(meta.date)}</td><td>${group}</td><td class="match-name">${matchName}</td><td class="actual-result">${actualResult}</td>${cells}</tr>`}).join('');content.innerHTML=`<section class="section compare"><h2>Jämför tips i gruppspelet</h2><input class="search" id="matchSearch" placeholder="Sök lag eller grupp…"><table><thead><tr><th>#</th><th>Datum</th><th>Grupp</th><th>Match</th><th>Resultat</th>${PARTICIPANTS.map(p=>`<th>${p}</th>`).join('')}</tr></thead><tbody id="compareRows">${rows}</tbody></table></section>`;document.getElementById('matchSearch').addEventListener('input',e=>{let q=e.target.value.toLowerCase();document.querySelectorAll('#compareRows tr').forEach(tr=>tr.style.display=tr.dataset.q.includes(q)?'':'none')})}
+
+/*
+calculateGroupStagePoints()
+Räknar poäng för gruppspelet.
+- Rätt antal mål för hemmalag: 2 poäng
+- Rätt antal mål för bortalag: 2 poäng
+- Rätt tecken 1/X/2: 3 poäng
+Max 7 poäng per match.
+*/
+function calculateGroupStagePoints(participant){
+  const matches = DATA[participant].matches || [];
+  let played = 0;
+  let correctHomeGoals = 0;
+  let correctAwayGoals = 0;
+  let correctSigns = 0;
+  let total = 0;
+
+  matches.forEach(prediction => {
+    const actual = parseResult(MATCH_RESULTS[prediction.match_no]);
+    if(!actual) return;
+
+    played += 1;
+
+    if(prediction.home_goals === actual.home){
+      correctHomeGoals += 1;
+      total += 2;
+    }
+
+    if(prediction.away_goals === actual.away){
+      correctAwayGoals += 1;
+      total += 2;
+    }
+
+    const predictedOutcome = getOutcome(prediction.home_goals, prediction.away_goals);
+    const actualOutcome = getOutcome(actual.home, actual.away);
+
+    if(predictedOutcome === actualOutcome){
+      correctSigns += 1;
+      total += 3;
+    }
+  });
+
+  return {
+    participant,
+    played,
+    correctHomeGoals,
+    correctAwayGoals,
+    correctGoals: correctHomeGoals + correctAwayGoals,
+    correctSigns,
+    total
+  };
+}
+
+function renderGroupStageScoreboard(){
+  const rows = PARTICIPANTS
+    .map(calculateGroupStagePoints)
+    .sort((a,b) => b.total - a.total || b.correctSigns - a.correctSigns || b.correctGoals - a.correctGoals)
+    .map((row, index) => `
+      <tr>
+        <td><b>${index + 1}</b></td>
+        <td><b>${row.participant}</b></td>
+        <td>${row.played}</td>
+        <td>${row.correctGoals}</td>
+        <td>${row.correctSigns}</td>
+        <td><b>${row.total}</b></td>
+      </tr>
+    `).join('');
+
+  return `
+    <section class="section scoreboard">
+      <h2>Poängställning gruppspelet</h2>
+      <p class="muted">2 poäng per rätt målsiffra och 3 poäng för rätt tecken 1/X/2. Max 7 poäng per match.</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Placering</th>
+            <th>Deltagare</th>
+            <th>Spelade</th>
+            <th>Rätta målsiffror</th>
+            <th>Rätta tecken</th>
+            <th>Poäng</th>
+          </tr>
+        </thead>
+        <tbody>${rows}</tbody>
+      </table>
+    </section>
+  `;
+}
+
+function renderCompare(){let nums=[...new Set(Object.values(DATA).flatMap(d=>d.matches.map(m=>m.match_no)))].sort((a,b)=>a-b);let today=new Date().toLocaleDateString('sv-SE',{day:'2-digit',month:'short'}).replace('.','').toLowerCase();let rows=nums.map(n=>{let meta=Object.values(DATA)[0].matches.find(m=>m.match_no===n)||{};let group=(meta.round||'').replace('Grupp ','');let matchName=`${meta.home??''} - ${meta.away??''}`;let actualResult=(typeof MATCH_RESULTS!=='undefined'&&MATCH_RESULTS[n])?MATCH_RESULTS[n]:'-';let rowDate=fmtDate(meta.date).toLowerCase();let todayClass=rowDate===today?'today-row':'';let cells=PARTICIPANTS.map(p=>{let m=DATA[p].matches.find(x=>x.match_no===n);let predictionClasses=m?getPredictionClasses(m,actualResult):'';return `<td>${m?resultChip(m,predictionClasses,actualResult):''}</td>`}).join('');return `<tr class="${todayClass}" data-q="${(meta.home+' '+meta.away+' '+meta.round).toLowerCase()}"><td>${n}</td><td>${fmtDate(meta.date)}</td><td>${group}</td><td class="match-name">${matchName}</td><td class="actual-result">${actualResult}</td>${cells}</tr>`}).join('');content.innerHTML=`${renderGroupStageScoreboard()}<section class="section compare"><h2>Jämför tips i gruppspelet</h2><input class="search" id="matchSearch" placeholder="Sök lag eller grupp…"><table><thead><tr><th>#</th><th>Datum</th><th>Grupp</th><th>Match</th><th>Resultat</th>${PARTICIPANTS.map(p=>`<th>${p}</th>`).join('')}</tr></thead><tbody id="compareRows">${rows}</tbody></table></section>`;document.getElementById('matchSearch').addEventListener('input',e=>{let q=e.target.value.toLowerCase();document.querySelectorAll('#compareRows tr').forEach(tr=>tr.style.display=tr.dataset.q.includes(q)?'':'none')})}
 function renderPerson(p){const d=DATA[p];const points=d.points.map(x=>`<tr><td>${x.category}</td><td>${x.points??''}</td><td>${x.bonus??''}</td><td><b>${x.total??''}</b></td></tr>`).join('');const bonus=d.bonus.map(x=>`<div class="bonus-item"><b>${x.category}</b><div>${x.answer??''}</div></div>`).join('');const rounds=d.rounds.map(r=>`<div class="card round"><h3>${r.name}</h3>${r.matches.map(matchCard).join('')}</div>`).join('');const standings=d.tables.map(g=>`<div class="card standings"><h3>${g.name}</h3><table><thead><tr><th>Lag</th><th>V</th><th>O</th><th>F</th><th>+/-</th><th>P</th></tr></thead><tbody>${g.rows.map(row=>`<tr><td>${row.team}</td><td>${row.v}</td><td>${row.o}</td><td>${row.f}</td><td>${row.diff}</td><td><b>${row.p}</b></td></tr>`).join('')}</tbody></table></div>`).join('');content.innerHTML=`<section class="person-header"><div class="section"><h2>${p}</h2><div class="podium"><div class="medal gold"><b>Guld</b><span>${d.champion??''}</span></div><div class="medal silver"><b>Silver</b><span>${d.silver??''}</span></div><div class="medal bronze"><b>Brons</b><span>${d.bronze??''}</span></div></div></div><div class="section compare"><h2>Poängöversikt</h2><table><tbody>${points}</tbody></table></div></section><section class="section"><h2>Bonusfrågor</h2><div class="bonus-list">${bonus}</div></section><section class="section"><h2>Slutspelsträd</h2><div class="grid rounds">${rounds}</div></section><section class="section"><h2>Grupptabeller enligt ${p}</h2><div class="grid tables">${standings}</div></section>`}
 document.querySelectorAll('.tab').forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll('.tab').forEach(b=>b.classList.remove('active'));btn.classList.add('active');const v=btn.dataset.view;if(v==='compare')renderCompare();else renderPerson(v.replace('person-',''));window.scrollTo({top:0,behavior:'smooth'})}));renderCompare();
