@@ -54,16 +54,16 @@ window.MATCH_RESULTS = {
   16: "1-1",
 
   // 16-jun | Grupp I | Frankrike - Senegal
-  17: "",
+  17: "3-1",
 
   // 17-jun | Grupp I | Irak - Norge
-  18: "",
+  18: "1-4",
 
   // 17-jun | Grupp J | Argentina - Algeriet
-  19: "",
+  19: "3-0",
 
   // 17-jun | Grupp J | Österrike - Jordanien
-  20: "",
+  20: "3-1",
 
   // 18-jun | Grupp L | Ghana - Panama
   21: "",
