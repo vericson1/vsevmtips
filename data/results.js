@@ -78,28 +78,28 @@ window.MATCH_RESULTS = {
   24: "1-3",
 
   // 18-jun | Grupp A | Czechia - Sydafrika
-  25: "",
+  25: "1-1",
 
   // 18-jun | Grupp B | Schweiz - Bosnien-Herzigovina
-  26: "",
+  26: "4-1",
 
   // 19-jun | Grupp B | Kanada - Qatar
-  27: "",
+  27: "6-0",
 
   // 19-jun | Grupp A | Mexiko - Sydkorea
-  28: "",
+  28: "1-0",
 
   // 20-jun | Grupp C | Brasilien - Haiti
-  29: "",
+  29: "3-0",
 
   // 20-jun | Grupp C | Skottland - Marocko
-  30: "",
+  30: "0-1",
 
   // 20-jun | Grupp D | Turkiet - Paraguay
-  31: "",
+  31: "0-1",
 
   // 19-jun | Grupp D | USA - Australien
-  32: "",
+  32: "2-0",
 
   // 20-jun | Grupp E | Tyskland - Elfenbenskusten
   33: "",
@@ -108,7 +108,7 @@ window.MATCH_RESULTS = {
   34: "",
 
   // 20-jun | Grupp F | Nederländerna - Sverige
-  35: "",
+  35: "5-1",
 
   // 21-jun | Grupp F | Tunisien - Japan
   36: "",
