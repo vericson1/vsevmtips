@@ -102,28 +102,28 @@ window.MATCH_RESULTS = {
   32: "2-0",
 
   // 20-jun | Grupp E | Tyskland - Elfenbenskusten
-  33: "",
+  33: "2-1",
 
   // 21-jun | Grupp E | Ecuador - Curaçao
-  34: "",
+  34: "0-0",
 
   // 20-jun | Grupp F | Nederländerna - Sverige
   35: "5-1",
 
   // 21-jun | Grupp F | Tunisien - Japan
-  36: "",
+  36: "0-4",
 
   // 22-jun | Grupp H | Uruguay - Kap Verde
-  37: "",
+  37: "2-2",
 
   // 21-jun | Grupp H | Spanien - Saudiarabien
-  38: "",
+  38: "4-0",
 
   // 21-jun | Grupp G | Belgien - Iran
-  39: "",
+  39: "0-0",
 
   // 22-jun | Grupp G | Nya Zeeland - Egypten
-  40: "",
+  40: "1-3",
 
   // 23-jun | Grupp I | Norge - Senegal
   41: "",
