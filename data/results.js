@@ -126,16 +126,16 @@ window.MATCH_RESULTS = {
   40: "1-3",
 
   // 23-jun | Grupp I | Norge - Senegal
-  41: "",
+  41: "3-2",
 
   // 22-jun | Grupp I | Frankrike - Irak
-  42: "",
+  42: "3-0",
 
   // 22-jun | Grupp J | Argentina - Österrike
-  43: "",
+  43: "2-0",
 
   // 23-jun | Grupp J | Jordanien - Algeriet
-  44: "",
+  44: "1-2",
 
   // 23-jun | Grupp L | England - Ghana
   45: "",
