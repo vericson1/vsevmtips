@@ -138,16 +138,16 @@ window.MATCH_RESULTS = {
   44: "1-2",
 
   // 23-jun | Grupp L | England - Ghana
-  45: "",
+  45: "0-0",
 
   // 24-jun | Grupp L | Panama - Kroatien
-  46: "",
+  46: "0-1",
 
   // 23-jun | Grupp K | Portugal - Uzbekistan
-  47: "",
+  47: "5-0",
 
   // 24-jun | Grupp K | Colombia - Kongo
-  48: "",
+  48: "1-0",
 
   // 25-jun | Grupp C | Skottland - Brasilien
   49: "",
