@@ -150,22 +150,22 @@ window.MATCH_RESULTS = {
   48: "1-0",
 
   // 25-jun | Grupp C | Skottland - Brasilien
-  49: "",
+  49: "0-3",
 
   // 25-jun | Grupp C | Marocko - Haiti
-  50: "",
+  50: "4-2",
 
   // 24-jun | Grupp B | Schweiz - Kanada
-  51: "",
+  51: "2-1",
 
   // 24-jun | Grupp B | Bosnien-Herzigovina - Qatar
-  52: "",
+  52: "3-1",
 
   // 25-jun | Grupp A | Czechia - Mexiko
-  53: "",
+  53: "0-3",
 
   // 25-jun | Grupp A | Sydafrika - Sydkorea
-  54: "",
+  54: "1-0",
 
   // 25-jun | Grupp E | Curaçao - Elfenbenskusten
   55: "",
