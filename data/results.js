@@ -168,22 +168,22 @@ window.MATCH_RESULTS = {
   54: "1-0",
 
   // 25-jun | Grupp E | Curaçao - Elfenbenskusten
-  55: "",
+  55: "0-2",
 
   // 25-jun | Grupp E | Ecuador - Tyskland
-  56: "",
+  56: "2-1",
 
   // 26-jun | Grupp F | Japan - Sverige
-  57: "",
+  57: "1-1",
 
   // 26-jun | Grupp F | Tunisien - Nederländerna
-  58: "",
+  58: "1-3",
 
   // 26-jun | Grupp D | Turkiet - USA
-  59: "",
+  59: "3-2",
 
   // 26-jun | Grupp D | Paraguay - Australien
-  60: "",
+  60: "0-0",
 
   // 26-jun | Grupp I | Norge - Frankrike
   61: "",
