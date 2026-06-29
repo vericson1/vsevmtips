@@ -186,44 +186,44 @@ window.MATCH_RESULTS = {
   60: "0-0",
 
   // 26-jun | Grupp I | Norge - Frankrike
-  61: "",
+  61: "1-4",
 
-  // 26-jun | Grupp I | Senegal - Irak
-  62: "",
+ // 26-jun | Grupp I | Senegal - Irak
+  62: "5-0",
 
   // 27-jun | Grupp G | Egypten - Iran
-  63: "",
+  63: "1-1",
 
   // 27-jun | Grupp G | Nya Zeeland - Belgien
-  64: "",
+  64: "1-5",
 
   // 27-jun | Grupp H | Kap Verde - Saudiarabien
-  65: "",
+  65: "0-0",
 
   // 27-jun | Grupp H | Uruguay - Spanien
-  66: "",
+  66: "0-1",
 
   // 27-jun | Grupp L | Panama - England
-  67: "",
+  67: "0-2",
 
   // 27-jun | Grupp L | Kroatien - Ghana
-  68: "",
+  68: "2-1",
 
   // 28-jun | Grupp J | Algeriet - Österrike
-  69: "",
+  69: "3-3",
 
   // 28-jun | Grupp J | Jordanien - Argentina
-  70: "",
+  70: "1-3",
 
   // 28-jun | Grupp K | Colombia - Portugal
-  71: "",
+  71: "0-0",
 
   // 28-jun | Grupp K | Kongo - Uzbekistan
-  72: "",
+  72: "3-1",
 
   // 28-jun | Sextondelsfinal | Sydkorea - Kanada
   73: "",
-
+  
   // 29-jun | Sextondelsfinal | Tyskland - Paraguay
   74: "",
 
